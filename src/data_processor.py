@@ -5,7 +5,7 @@ import random
 
 class DataProcessor:
 
-    def __init__(self, height=512, width=512):
+    def __init__(self, height, width):
         self.height = height
         self.width = width
 

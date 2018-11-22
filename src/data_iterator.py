@@ -4,7 +4,7 @@ from src.data_processor import DataProcessor
 
 class DataIterator:
 
-    def __init__(self, filename, random_order=False, run_forever=False, batch_size=6):
+    def __init__(self, filename, random_order=False, run_forever=False, batch_size=32):
         self.filename = filename
         self.random_order = random_order
         self.run_forever = run_forever
@@ -21,14 +21,14 @@ class DataIterator:
                 shuffle(image_paths)
             return image_paths
 
-    def iterate(self):
+    def iterate(self, height=512, width=512):
         """
         Loop through the image paths list and for every batch_size of images, it yields a numpy array
         with the dimension (batch_size, 3, height, width)
         height & width can be specified when creating a new instance of DataProcessor
         """
         paths = self.get_image_paths()
-        processor = DataProcessor()
+        processor = DataProcessor(height=height, width=width)
         if self.run_forever:
             while True:
                 while len(paths) < self.batch_size:
